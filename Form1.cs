@@ -22,11 +22,15 @@ namespace TestEfCore
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            requete();
+        }
+
+        public void requete()
+        {
             comboBoxChoixAffichage.SelectedIndex = 0;
             BLLFormation B = new BLLFormation();
             this.dataGridView1.DataSource = B.getFormation();
         }
-
 
         private void comboBoxChoixAffichage_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -64,6 +68,7 @@ namespace TestEfCore
             B.ajouterFormation(maFormation);
             //j'actualise la dataGridView*/
             this.dataGridView1.DataSource = B.getFormation();
+            requete();
 
         }
 

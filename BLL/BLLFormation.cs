@@ -9,16 +9,27 @@ namespace TestEfCore.BLL
     class BLLFormation
     {
         // Méthode qui permet d'ajouter une nouvelle formation
-        public bool ajouterFormation(Formation formatioAAjouter)
+        public void ajouterFormation(string _Nom, string _niveau, int _nbStagiaire)
         {
-            bool testOK = false;
-            //Création d'un nouvel objet Formation
-            using formationsContext db = new formationsContext();
-            //Ajoutons maintenant la nouvelle formation à la classe puis ajoutons la classe au DataContext
-            db.Formation.Add(formatioAAjouter);//on ajoute un objet dans la liste
-            if (db.SaveChanges() > 0)// on persiste en base
-                testOK = true;
-            return testOK;
+            //bool testOK = false;
+            ////Création d'un nouvel objet Formation
+            //using formationsContext db = new formationsContext();
+            ////Ajoutons maintenant la nouvelle formation à la classe puis ajoutons la classe au DataContext
+            //db.Formation.Add(formationAAjouter);//on ajoute un objet dans la liste
+            //if (db.SaveChanges() > 0)// on persiste en base
+            //    testOK = true;
+            //return testOK;
+
+            using var db = new formationsContext();
+            Formation newFormation = new Formation()
+            {
+                Nom = _Nom,
+                Niveau = _niveau,
+                NbStagiaires = _nbStagiaire
+            };
+
+            db.Formation.Add(newFormation);
+            db.SaveChanges();
         }
         // Méthode qui permet d'ajouter une nouvelle formation
         public bool supprimerFormation(int PK)
